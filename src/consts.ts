@@ -1,0 +1,7 @@
+export const hour = 'Hour'
+export const minute = 'Minute'
+export const frequencyDuration = 'Frequency / Duration'
+export const startEnd = 'Start Time / End Time'
+export const SSD1305 = 'SSD1305 - OLED Display'
+export const SH1106 = 'SH1106 - OLED Display'
+export const ADA_SSD1306 = 'Adafruit SSD1306 - OLED Display'

@@ -1,0 +1,2 @@
+RUN_EMULATOR = False
+DEBUG = False
