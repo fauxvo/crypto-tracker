@@ -1,7 +1,6 @@
 import requests
 import ccxt
 import sys
-import debugpy
 
 from functools import partial
 
