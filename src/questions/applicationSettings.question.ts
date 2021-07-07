@@ -18,6 +18,7 @@ export async function applicationSettingsQuestion(
         type: 'list',
         name: 'localCurrency',
         message: 'Which currency would you like to use?',
+        default: applicationSettings.localCurrency,
         choices: localCurrencies.map((currency) => {
           return { name: currency, value: currency }
         }),
@@ -26,6 +27,7 @@ export async function applicationSettingsQuestion(
         type: 'list',
         name: 'typeOfDisplay',
         message: 'Which display are you using?',
+        default: applicationSettings.typeOfDisplay,
         choices: [ADA_SSD1306, SH1106, SSD1305].map((display) => {
           return { name: display, value: display }
         }),
@@ -78,9 +80,16 @@ export async function applicationSettingsQuestion(
         default: applicationSettings.runOnSchedule,
       },
       {
+        type: 'confirm',
+        name: 'showProgressBar',
+        message: 'Would you like to display the progress bar?',
+        default: applicationSettings.showProgressBar,
+      },
+      {
         type: 'list',
         name: 'typeOfSchedule',
         message: 'What type of schedule would you like to run?',
+        default: applicationSettings.typeOfSchedule,
         choices: [startEnd, frequencyDuration].map((schedule) => {
           return { name: schedule, value: schedule }
         }),

@@ -8,6 +8,7 @@ export const coinList: Coin[] = [
     blackImagePath: '../src/images/safe_logo_invert.bmp',
     contractAddress: '0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3',
     tradingPair: 'SAFEMOON/USDT',
+    hasReflections: true,
     tracker: {
       name: 'BSCScan',
       requiresAPI: true,
@@ -26,6 +27,7 @@ export const coinList: Coin[] = [
     blackImagePath: '../src/images/btc_invert.png',
     contractAddress: '',
     tradingPair: 'BTC/USDT',
+    hasReflections: false,
     tracker: {
       name: 'Blockcypher',
       requiresAPI: false,
@@ -42,6 +44,7 @@ export const coinList: Coin[] = [
     blackImagePath: '../src/images/eth_invert.png',
     contractAddress: '',
     tradingPair: 'ETH/USDT',
+    hasReflections: false,
     tracker: {
       name: 'EthScan',
       requiresAPI: true,
@@ -60,6 +63,7 @@ export const coinList: Coin[] = [
     blackImagePath: '../src/images/doge_invert.png',
     contractAddress: '',
     tradingPair: 'DOGE/USDT',
+    hasReflections: false,
     tracker: {
       name: 'DogeChain',
       requiresAPI: false,

@@ -31,6 +31,7 @@ export default class ConfigSettings {
           configButtonPin: 4,
           rotateScreen: false,
           runOnSchedule: false,
+          showProgressBar: true,
         },
       }
     }
