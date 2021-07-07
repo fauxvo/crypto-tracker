@@ -52,6 +52,9 @@ export interface ApplicationSettings {
   runOnSchedule: boolean
   typeOfSchedule?: string
   showProgressBar?: boolean
+  showBalanceScreen?: boolean
+  showPriceScreen?: boolean
+  showReflectionScreen?: boolean
   schedule?: frequencyDuration | startEnd
 }
 
