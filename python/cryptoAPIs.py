@@ -1,5 +1,7 @@
 import requests
 import ccxt
+import sys
+import debugpy
 
 from functools import partial
 
@@ -11,13 +13,6 @@ def get_scan_balance(coin):
     api_key = coin.tracker.apiKey
     contract_address = coin.contractAddress
     coin_multiplier = coin.tracker.coinMultiplier
-
-    # print(symbol)
-    # print(url)
-    # print(wallet_addresses)
-    # print(api_key)
-    # print(contract_address)
-    # print(coin_multiplier)
 
     switcher = {
         'BTC': partial(get_bitcoin_balance, url, wallet_addresses, coin_multiplier),
@@ -78,15 +73,10 @@ def update_data(financial_data_item, coin):
     global financialDataList
     exchange = ccxt.gateio()
 
-    financial_data_item.previous_balance = financial_data_item.current_balance
-
     try:
+        financial_data_item.previous_balance = financial_data_item.current_balance
+
         financial_data_item.current_balance = get_scan_balance(coin)
-    except:
-        financial_data_item.current_balance = financial_data_item.previous_balance
-        pass
-
-    try:
         ticker = exchange.fetch_ticker(coin.tradingPair)
         financial_data_item.previous_rate = financial_data_item.current_rate
         financial_data_item.current_rate = (float)(ticker['info']['last'])
@@ -105,4 +95,5 @@ def update_data(financial_data_item, coin):
 
         return financial_data_item
     except:
-        pass
+        # Bit of a hack -- If CCXT timesout, just return the original object and hopefully it gets sorted next round
+        return financial_data_item

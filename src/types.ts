@@ -19,6 +19,7 @@ export interface Coin {
   blackImagePath?: string
   contractAddress: string
   tradingPair: string
+  hasReflections: boolean
   walletAddresses: string[]
   tracker: Tracker
 }
@@ -50,6 +51,7 @@ export interface ApplicationSettings {
   rotateScreen: boolean
   runOnSchedule: boolean
   typeOfSchedule?: string
+  showProgressBar?: boolean
   schedule?: frequencyDuration | startEnd
 }
 
