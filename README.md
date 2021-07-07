@@ -12,6 +12,7 @@ Additional features include:
 - The ability to schedule when the application is being run either between a specific set of times (09:00 -> 17:00) or a schedule for a particular duration (20 minutes at the start of every hour)
 - The ability to toggle through your tracked coins using Next / Prev buttons (currently only the Adafruit SSD1306 Display is supported)
 - Support for rotating the screen
+- Ability to toggle each screen (Total Wallet Balance, Current Price, Reflections since app started)
 
 ### Prerequisites:
 
@@ -49,7 +50,7 @@ The crypto tracker app simply uses 3rd party apis to get total coin values for t
 
 The app then cycles through all of the coins provided and repeats the process. In addition to simply getting the latest values of the wallets from the blockchain APIs, the previous wallet balances are also stored in the system. The balance screen simply displays the change from the previous balances to the current balance.
 
-In the case of coins with reflections like Safemoon, the application is not calculating reflections per say, just displaying the different between two balances which when using an exchange like Pancake Swap, will most likely show a new balance that is higher than the last time it was queried and you will see the growth your wallet has made.
+In the case of coins with reflections like Safemoon, the application is not calculating reflections per say, just displaying the difference between two balances (the original balance upon application start and the current balance) which when using an exchange like Pancake Swap, will most likely show a new balance that is higher than the last time it was queried and you will see the growth your wallet has made.
 
 ### 3rd Party API Keys:
 
