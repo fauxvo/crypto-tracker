@@ -180,7 +180,7 @@ def screen_mapper(screen):
         -2: 'IP Screen',
         0: 'Coin Loading Screen',
         1: 'Coin Balance Screen',
-        2: 'Coin Rate Screen',
+        2: 'Coin Price Screen',
         3: 'Coin Difference Screen'
     }
 
@@ -374,6 +374,9 @@ def crypto_tracker():
 
         # Coin Balance Screen
         if current_screen == 1:
+            if not config_file.applicationSettings.showBalanceScreen:
+                start_time = start_time - display_time
+
             canvas = Image.new(image_encoding, (frame_size), background_color)
             draw = ImageDraw.Draw(canvas)
 
@@ -410,8 +413,11 @@ def crypto_tracker():
                         time_delta) * local_exchange),
                 fill=foreground_color, font=title_font)
 
-        # Coin Rate Screen
+        # Coin Price Screen
         if current_screen == 2:
+            if not config_file.applicationSettings.showPriceScreen:
+                start_time = start_time - display_time
+
             canvas = Image.new(image_encoding, (frame_size), background_color)
             draw = ImageDraw.Draw(canvas)
             draw.text(
@@ -447,6 +453,9 @@ def crypto_tracker():
 
         # Difference Screen
         if current_screen == 3:
+            if not config_file.applicationSettings.showBalanceScreen:
+                start_time = start_time - display_time
+
             if not config_file.coins[current_coin].hasReflections:
                 start_time = start_time - display_time  # Trigger the next screen
             else:

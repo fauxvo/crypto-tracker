@@ -32,6 +32,9 @@ export default class ConfigSettings {
           rotateScreen: false,
           runOnSchedule: false,
           showProgressBar: true,
+          showBalanceScreen: true,
+          showPriceScreen: true,
+          showReflectionScreen: true,
         },
       }
     }

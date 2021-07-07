@@ -86,6 +86,25 @@ export async function applicationSettingsQuestion(
         default: applicationSettings.showProgressBar,
       },
       {
+        type: 'confirm',
+        name: 'showBalanceScreen',
+        message: 'Would you like to display the balance screen?',
+        default: applicationSettings.showBalanceScreen,
+      },
+      {
+        type: 'confirm',
+        name: 'showPriceScreen',
+        message: 'Would you like to display the price screen?',
+        default: applicationSettings.showPriceScreen,
+      },
+      {
+        type: 'confirm',
+        name: 'showReflectionScreen',
+        message:
+          'Would you like to display the reflection screen (when applicable)?',
+        default: applicationSettings.showReflectionScreen,
+      },
+      {
         type: 'list',
         name: 'typeOfSchedule',
         message: 'What type of schedule would you like to run?',
