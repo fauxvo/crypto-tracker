@@ -1,6 +1,5 @@
 import requests
 import ccxt
-import sys
 
 from functools import partial
 
