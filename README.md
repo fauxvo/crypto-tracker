@@ -1,8 +1,14 @@
 # Crypto Tracker
 
+[![Crypto-Tracker Video](https://img.youtube.com/vi/Dk3PGryk1vc/0.jpg)](https://www.youtube.com/watch?v=Dk3PGryk1vc)
+
 This project is a modified version of [aCallum's SafePi project](https://github.com/aCallum/SafePi) and first and foremost, I want to give them a huge shoutout for the inspiration and work put forward to create this.
 
 Crypto Tracker takes the [SafePi](https://github.com/aCallum/SafePi) project even further and creates support for other crypto currencies, currently supporting **BTC**, **ETH**, **DOGE** and of course, **SAFEMOON**!!
+
+## If you'd like to buy me a cup of coffee or if you want to unload some excess crypto burning a hole in your wallet 😂 -- you can thank me here [coindrop.to/fauxvo](https://coindrop.to/fauxvo)
+
+---
 
 Additional features include:
 
