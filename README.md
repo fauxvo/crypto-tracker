@@ -8,7 +8,9 @@ Crypto Tracker takes the [SafePi](https://github.com/aCallum/SafePi) project eve
 
 ### If you'd like to buy me a cup of coffee or if you want to unload some excess crypto burning a hole in your wallet 😂 -- you can thank me here [coindrop.to/fauxvo](https://coindrop.to/fauxvo)
 
-Additional features include:
+---
+
+#### Additional features include:
 
 - Support for multiple wallets per coin
 - A Javascript configuration panel which makes setting up of coins / wallets and configuration settings much easier
