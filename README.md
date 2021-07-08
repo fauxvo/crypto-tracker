@@ -79,7 +79,7 @@ In order to get the latest information used by the crypto tracker application, u
 
    `wget -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
 
-3. Follow the necessary prompts and reboot the PI
+3. Follow the necessary prompts and reboot the PI --- (if you selected to run the application on boot, you'll see an error in the terminal, this can be ignored until you setup the configuration file in the step below)
 4. Setup the necessary configuration file by executing
 
    `cd ~/crypto-tracker && npm run start`
