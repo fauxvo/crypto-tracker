@@ -77,7 +77,7 @@ In order to get the latest information used by the crypto tracker application, u
 1. Log in to your Raspberry PI
 2. Execute the installation script in order to get the correct packages and repos
 
-   `wget -q -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
+   `wget -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
 
 3. Follow the necessary prompts and reboot the PI
 4. Setup the necessary configuration file by executing
