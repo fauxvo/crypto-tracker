@@ -52,10 +52,10 @@ export async function applicationSettingsQuestion(
       },
       {
         type: 'number',
-        name: 'configButtonPin',
+        name: 'balanceButtonPin',
         message:
-          'Which pin would you like to use for navigating to the config screen?',
-        default: applicationSettings.configButtonPin,
+          'Which pin would you like to use for navigating to the total balance screen?',
+        default: applicationSettings.balanceButtonPin,
         when: (answers) =>
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
