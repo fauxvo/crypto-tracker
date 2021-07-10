@@ -67,7 +67,7 @@ export const coinList: Coin[] = [
     tracker: {
       name: 'DogeChain',
       requiresAPI: false,
-      coinMultiplier: 0.00000001,
+      coinMultiplier: 1,
       url: `https://dogechain.info/api/v1/address/balance/{0}`,
       apiKey: '',
     },

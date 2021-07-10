@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get -y upgrade
 
 # Install Node
-wget -O - https://raw.githubusercontent.com/audstanley/NodeJs-Raspberry-Pi/master/Install-Node.sh | sudo bash
+wget -O - https://raw.githubusercontent.com/audstanley/NodeJs-Raspberry-Pi/master/Install-Node.sh | bash
 
 # Might have to put a catch for Node here
 

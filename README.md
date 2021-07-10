@@ -1,10 +1,16 @@
 # Crypto Tracker
 
+[![Crypto-Tracker Video](https://img.youtube.com/vi/Dk3PGryk1vc/0.jpg)](https://www.youtube.com/watch?v=Dk3PGryk1vc)
+
 This project is a modified version of [aCallum's SafePi project](https://github.com/aCallum/SafePi) and first and foremost, I want to give them a huge shoutout for the inspiration and work put forward to create this.
 
 Crypto Tracker takes the [SafePi](https://github.com/aCallum/SafePi) project even further and creates support for other crypto currencies, currently supporting **BTC**, **ETH**, **DOGE** and of course, **SAFEMOON**!!
 
-Additional features include:
+### If you'd like to buy me a cup of coffee or if you want to unload some excess crypto burning a hole in your wallet 😂 -- you can thank me here [coindrop.to/fauxvo](https://coindrop.to/fauxvo)
+
+---
+
+#### Additional features include:
 
 - Support for multiple wallets per coin
 - A Javascript configuration panel which makes setting up of coins / wallets and configuration settings much easier
@@ -50,7 +56,7 @@ The crypto tracker app simply uses 3rd party apis to get total coin values for t
 
 The app then cycles through all of the coins provided and repeats the process. In addition to simply getting the latest values of the wallets from the blockchain APIs, the previous wallet balances are also stored in the system. The balance screen simply displays the change from the previous balances to the current balance.
 
-In the case of coins with reflections like Safemoon, the application is not calculating reflections per say, just displaying the different between two balances which when using an exchange like Pancake Swap, will most likely show a new balance that is higher than the last time it was queried and you will see the growth your wallet has made.
+In the case of coins with reflections like Safemoon, the application is not calculating reflections per say, just displaying the difference between two balances (the original balance upon application start and the current balance) which when using an exchange like Pancake Swap, will most likely show a new balance that is higher than the last time it was queried and you will see the growth your wallet has made.
 
 ### 3rd Party API Keys:
 
@@ -73,7 +79,7 @@ In order to get the latest information used by the crypto tracker application, u
 
    `wget -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
 
-3. Follow the necessary prompts and reboot the PI
+3. Follow the necessary prompts and reboot the PI --- (if you selected to run the application on boot, you'll see an error in the terminal, this can be ignored until you setup the configuration file in the step below)
 4. Setup the necessary configuration file by executing
 
    `cd ~/crypto-tracker && npm run start`
