@@ -47,7 +47,7 @@ export interface ApplicationSettings {
   currencyConverterAPIKey: string
   leftButtonPin: number
   rightButtonPin: number
-  configButtonPin: number
+  balanceButtonPin: number
   rotateScreen: boolean
   runOnSchedule: boolean
   typeOfSchedule?: string

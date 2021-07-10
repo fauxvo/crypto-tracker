@@ -28,7 +28,7 @@ export default class ConfigSettings {
           currencyConverterAPIKey: '',
           leftButtonPin: 5,
           rightButtonPin: 6,
-          configButtonPin: 4,
+          balanceButtonPin: 4,
           rotateScreen: false,
           runOnSchedule: false,
           showProgressBar: true,

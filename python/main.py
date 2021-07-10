@@ -111,9 +111,9 @@ if not config.RUN_EMULATOR and config_file.applicationSettings.typeOfDisplay == 
     button_right.direction = Direction.INPUT
     button_right.pull = Pull.UP
 
-    button_config = DigitalInOut(get_board_pin(config_file.applicationSettings.configButtonPin))
-    button_config.direction = Direction.INPUT
-    button_config.pull = Pull.UP
+    button_balance = DigitalInOut(get_board_pin(config_file.applicationSettings.balanceButtonPin))
+    button_balance.direction = Direction.INPUT
+    button_balance.pull = Pull.UP
 
     # Create the I2C interface
     i2c = busio.I2C(board.SCL, board.SDA)
@@ -550,7 +550,7 @@ def display(canvas):
         elif k == 3:
             toggleCurrentCoin()
     else:
-        if 'button_config' in globals() and not button_config.value:
+        if 'button_balance' in globals() and not button_balance.value:
             debug_output('TOTAL WALLET')
             previous_coin = current_coin
             previous_screen = current_screen

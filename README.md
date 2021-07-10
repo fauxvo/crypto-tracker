@@ -12,6 +12,7 @@ Additional features include:
 - The ability to schedule when the application is being run either between a specific set of times (09:00 -> 17:00) or a schedule for a particular duration (20 minutes at the start of every hour)
 - The ability to toggle through your tracked coins using Next / Prev buttons (currently only the Adafruit SSD1306 Display is supported)
 - Support for rotating the screen
+- Support for showing total balance of all coins in all wallets
 
 ### Prerequisites:
 
@@ -70,7 +71,7 @@ In order to get the latest information used by the crypto tracker application, u
 1. Log in to your Raspberry PI
 2. Execute the installation script in order to get the correct packages and repos
 
-   `wget -q -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
+   `wget -O - https://raw.githubusercontent.com/fauxvo/crypto-tracker/master/installDependencies.sh | bash`
 
 3. Follow the necessary prompts and reboot the PI
 4. Setup the necessary configuration file by executing
