@@ -14,7 +14,7 @@ from datetime import datetime
 
 from cryptoAPIs import get_exchange_rate, update_data
 from financialData import FinancialData
-from mathFunctions import clamp, inverse_lerp, lerp
+from mathFunctions import inverse_lerp, lerp
 
 from pathlib import Path
 
@@ -80,6 +80,9 @@ financial_data_list = [FinancialData(0, 0, 0, 0, 0, 0, 0, 0) for _ in range(numb
 is_ada_fruit = False
 is_SH1106 = False
 scheduler = BackgroundScheduler()
+
+start_time = time.time()
+display_time = config_file.applicationSettings.timeOnScreen
 ############################ End of Variable Declaration ####################################
 
 
@@ -172,13 +175,12 @@ def toggleCurrentCoin(increment=True):
 
 
 def screen_mapper(screen):
-
     switcher = {
         -1: 'Initialization Screen',
         -2: 'IP Screen',
         0: 'Coin Loading Screen',
         1: 'Coin Balance Screen',
-        2: 'Coin Rate Screen',
+        2: 'Coin Price Screen',
         3: 'Coin Difference Screen'
     }
 
@@ -242,6 +244,8 @@ def crypto_tracker():
     global background_color
     global foreground_color
     global application_start_time
+    global start_time
+    global display_time
 
     frame_size = (config_file.applicationSettings.displayWidth, config_file.applicationSettings.displayHeight)
     screen_y_offset = (int)((config_file.applicationSettings.displayHeight - 32) / 2)
@@ -255,7 +259,6 @@ def crypto_tracker():
 
     arrow = Image.open('images/arrow.bmp').convert(image_encoding)
     arrow = arrow.resize((8, 8), Image.ANTIALIAS)
-    display_time = 60 / 6
 
     local_exchange = 1
 
@@ -268,13 +271,17 @@ def crypto_tracker():
 
     while run_application():
 
+        time_diff = time.time() - start_time
+
         debug_output('Top of Loop')
         debug_output('Current Coin: ' + str(current_coin))
         debug_output('Current Screen: ' + screen_mapper(current_screen))
+        debug_output('Current Time on Screen: ' + str(time_diff))
+
         debug_output('\n')
 
         # Pre loading calculations
-        if(time.time() - start_time) > display_time:
+        if(time_diff) > display_time:
             start_time = time.time()
 
             if (current_screen == -2):
@@ -367,8 +374,12 @@ def crypto_tracker():
 
         # Coin Balance Screen
         if current_screen == 1:
+            if not config_file.applicationSettings.showBalanceScreen:
+                start_time = start_time - display_time
+
             canvas = Image.new(image_encoding, (frame_size), background_color)
             draw = ImageDraw.Draw(canvas)
+
             draw.text(
                 (0, -1 + screen_y_offset),
                 config_file.coins[current_coin].name + " Balance (" + config_file.coins[current_coin].symbol + ")",
@@ -402,8 +413,11 @@ def crypto_tracker():
                         time_delta) * local_exchange),
                 fill=foreground_color, font=title_font)
 
-        # Coin Rate Screen
+        # Coin Price Screen
         if current_screen == 2:
+            if not config_file.applicationSettings.showPriceScreen:
+                start_time = start_time - display_time
+
             canvas = Image.new(image_encoding, (frame_size), background_color)
             draw = ImageDraw.Draw(canvas)
             draw.text(
@@ -439,25 +453,31 @@ def crypto_tracker():
 
         # Difference Screen
         if current_screen == 3:
-            canvas = Image.new(image_encoding, (frame_size), background_color)
-            draw = ImageDraw.Draw(canvas)
-            draw.text(
-                (0, -1 + screen_y_offset),
-                config_file.coins[current_coin].name + " Balance Changes", fill=foreground_color, font=title_font)
-            draw.text(
-                (1, 9 + screen_y_offset),
-                config_file.coins[current_coin].name[0],
-                fill=foreground_color, font=coin_font_large)
-            draw.text((15, 7 + screen_y_offset),
-                      "{:,.2f}".format(
-                          lerp(
-                              financial_data_list[current_coin].previous_balance_change,
-                              financial_data_list[current_coin].current_balance_change, time_delta)),
-                      fill=foreground_color, font=balance_font)
+            if not config_file.applicationSettings.showBalanceScreen:
+                start_time = start_time - display_time
 
-            draw.text(
-                (0, 32 - 8 + screen_y_offset),
-                "since " + application_start_time.strftime("%H:%M:%S"), fill=foreground_color, font=title_font)
+            if not config_file.coins[current_coin].hasReflections:
+                start_time = start_time - display_time  # Trigger the next screen
+            else:
+                canvas = Image.new(image_encoding, (frame_size), background_color)
+                draw = ImageDraw.Draw(canvas)
+                draw.text(
+                    (0, -1 + screen_y_offset),
+                    config_file.coins[current_coin].name + " Balance Changes", fill=foreground_color, font=title_font)
+                draw.text(
+                    (1, 9 + screen_y_offset),
+                    config_file.coins[current_coin].name[0],
+                    fill=foreground_color, font=coin_font_large)
+                draw.text((15, 7 + screen_y_offset),
+                          "{:,.2f}".format(
+                    lerp(
+                        financial_data_list[current_coin].previous_balance_change,
+                        financial_data_list[current_coin].current_balance_change, time_delta)),
+                    fill=foreground_color, font=balance_font)
+
+                draw.text(
+                    (0, 32 - 8 + screen_y_offset),
+                    "since " + application_start_time.strftime("%H:%M:%S"), fill=foreground_color, font=title_font)
 
         time_delta = inverse_lerp(0, display_time, time.time() - start_time)
         display(canvas)
@@ -474,6 +494,13 @@ def crypto_tracker():
         display(canvas)
 
 
+def calculate_progress(percentage: float):
+    global config_file
+
+    end_point = float(config_file.applicationSettings.displayWidth)
+    return percentage * end_point
+
+
 def display(canvas):
     global config_file
     global is_ada_fruit
@@ -483,6 +510,16 @@ def display(canvas):
     global current_screen
     global previous_screen
     global quit_application
+    global start_time
+    global display_time
+    global foreground_color
+
+    if current_screen != -1 and config_file.applicationSettings.showProgressBar:
+        time_diff = time.time() - start_time
+        progress_length = calculate_progress(time_diff / display_time)
+
+        progress_line = ImageDraw.Draw(canvas)
+        progress_line.line([(0, 0), (progress_length, 0)], fill=foreground_color, width=3)
 
     if config.RUN_EMULATOR:
         # Virtual Display
@@ -508,10 +545,12 @@ def display(canvas):
 
         if 'button_left' in globals() and not button_left.value:
             debug_output('LEFT')
+            start_time = time.time()
             toggleCurrentCoin(False)
 
         if 'button_right' in globals() and not button_right.value:
             debug_output('RIGHT')
+            start_time = time.time()
             toggleCurrentCoin()
 
         if config_file.applicationSettings.rotateScreen:

@@ -18,6 +18,7 @@ export async function applicationSettingsQuestion(
         type: 'list',
         name: 'localCurrency',
         message: 'Which currency would you like to use?',
+        default: applicationSettings.localCurrency,
         choices: localCurrencies.map((currency) => {
           return { name: currency, value: currency }
         }),
@@ -26,12 +27,13 @@ export async function applicationSettingsQuestion(
         type: 'list',
         name: 'typeOfDisplay',
         message: 'Which display are you using?',
+        default: applicationSettings.typeOfDisplay,
         choices: [ADA_SSD1306, SH1106, SSD1305].map((display) => {
           return { name: display, value: display }
         }),
       },
       {
-        type: 'input',
+        type: 'number',
         name: 'rightButtonPin',
         message:
           'Which pin would you like to use for navigating to the next screen?',
@@ -40,7 +42,7 @@ export async function applicationSettingsQuestion(
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
       {
-        type: 'input',
+        type: 'number',
         name: 'leftButtonPin',
         message:
           'Which pin would you like to use for navigating to the previous screen?',
@@ -49,7 +51,7 @@ export async function applicationSettingsQuestion(
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
       {
-        type: 'input',
+        type: 'number',
         name: 'configButtonPin',
         message:
           'Which pin would you like to use for navigating to the config screen?',
@@ -78,9 +80,50 @@ export async function applicationSettingsQuestion(
         default: applicationSettings.runOnSchedule,
       },
       {
+        type: 'confirm',
+        name: 'showProgressBar',
+        message: 'Would you like to display the progress bar?',
+        default: applicationSettings.showProgressBar,
+      },
+      {
+        type: 'input',
+        name: 'showProgressBar',
+        message: 'Would you like to display the progress bar?',
+        default: applicationSettings.showProgressBar,
+      },
+      {
+        type: 'number',
+        name: 'timeOnScreen',
+        message: 'How long would you like to stay on each screen (in seconds)?',
+        default: applicationSettings.timeOnScreen,
+        validate: (timeOnScreen) => {
+          return timeOnScreen > 3
+        },
+      },
+      {
+        type: 'confirm',
+        name: 'showBalanceScreen',
+        message: 'Would you like to display the balance screen?',
+        default: applicationSettings.showBalanceScreen,
+      },
+      {
+        type: 'confirm',
+        name: 'showPriceScreen',
+        message: 'Would you like to display the price screen?',
+        default: applicationSettings.showPriceScreen,
+      },
+      {
+        type: 'confirm',
+        name: 'showReflectionScreen',
+        message:
+          'Would you like to display the reflection screen (when applicable)?',
+        default: applicationSettings.showReflectionScreen,
+      },
+      {
         type: 'list',
         name: 'typeOfSchedule',
         message: 'What type of schedule would you like to run?',
+        default: applicationSettings.typeOfSchedule,
         choices: [startEnd, frequencyDuration].map((schedule) => {
           return { name: schedule, value: schedule }
         }),
