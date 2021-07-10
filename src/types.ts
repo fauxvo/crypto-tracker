@@ -47,14 +47,15 @@ export interface ApplicationSettings {
   currencyConverterAPIKey: string
   leftButtonPin: number
   rightButtonPin: number
-  configButtonPin: number
+  balanceButtonPin: number
   rotateScreen: boolean
   runOnSchedule: boolean
   typeOfSchedule?: string
-  showProgressBar?: boolean
-  showBalanceScreen?: boolean
-  showPriceScreen?: boolean
-  showReflectionScreen?: boolean
+  showProgressBar: boolean
+  showBalanceScreen: boolean
+  showPriceScreen: boolean
+  showReflectionScreen: boolean
+  timeOnScreen: number
   schedule?: frequencyDuration | startEnd
 }
 

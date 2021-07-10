@@ -82,7 +82,7 @@ is_SH1106 = False
 scheduler = BackgroundScheduler()
 
 start_time = time.time()
-display_time = 60 / 6
+display_time = config_file.applicationSettings.timeOnScreen
 ############################ End of Variable Declaration ####################################
 
 
@@ -111,9 +111,9 @@ if not config.RUN_EMULATOR and config_file.applicationSettings.typeOfDisplay == 
     button_right.direction = Direction.INPUT
     button_right.pull = Pull.UP
 
-    button_config = DigitalInOut(get_board_pin(config_file.applicationSettings.configButtonPin))
-    button_config.direction = Direction.INPUT
-    button_config.pull = Pull.UP
+    button_balance = DigitalInOut(get_board_pin(config_file.applicationSettings.balanceButtonPin))
+    button_balance.direction = Direction.INPUT
+    button_balance.pull = Pull.UP
 
     # Create the I2C interface
     i2c = busio.I2C(board.SCL, board.SDA)
@@ -177,7 +177,7 @@ def toggleCurrentCoin(increment=True):
 def screen_mapper(screen):
     switcher = {
         -1: 'Initialization Screen',
-        -2: 'IP Screen',
+        -2: 'Total Wallet Balance Screen',
         0: 'Coin Loading Screen',
         1: 'Coin Balance Screen',
         2: 'Coin Price Screen',
@@ -326,17 +326,28 @@ def crypto_tracker():
 
             initializing_draw = False
 
-        # # Configuration Screen
+        # Configuration Screen
         if current_screen == -2:
+            total_balance = 0
+            total_current_coin = 0
 
-            hostname = socket.gethostname()
-            local_ip = socket.gethostbyname(hostname)
+            for _ in range(number_of_coins):
+                total_balance = total_balance + financial_data_list[total_current_coin].current_balance
+                total_current_coin += 1
 
             canvas = Image.new(image_encoding, (frame_size), background_color)
-
             draw = ImageDraw.Draw(canvas)
-            draw.text((5, 11 + screen_y_offset), local_ip, fill=foreground_color, font=splash_font)
-            draw.text((75, 32 - 9 + screen_y_offset), "IP Address", fill=foreground_color, font=title_font)
+
+            draw.text(
+                (0, -1 + screen_y_offset),
+                "Total Balance ",
+                fill=foreground_color, font=title_font)
+            draw.text(
+                (1, 9 + screen_y_offset),
+                config_file.applicationSettings.localCurrencyChar,
+                fill=foreground_color, font=coin_font_large)
+            draw.text((15, 7 + screen_y_offset),
+                      "{:,.2f}".format(total_balance), fill=foreground_color, font=balance_font)
 
         # Coin loading screen
         if current_screen == 0:
@@ -368,9 +379,9 @@ def crypto_tracker():
                 config_file.coins[current_coin].name, fill=foreground_color, font=splash_font)
             draw.text((95, 32 - 9 + screen_y_offset), "Tracker", fill=foreground_color, font=title_font)
 
-            if (time.time() - start_time) > 8:
-                start_time = time.time()
-                current_screen += 1
+            # if (time.time() - start_time) > 8:
+            #     start_time = time.time()
+            #     current_screen += 1
 
         # Coin Balance Screen
         if current_screen == 1:
@@ -539,8 +550,10 @@ def display(canvas):
         elif k == 3:
             toggleCurrentCoin()
     else:
-        if 'button_config' in globals() and not button_config.value:
-            debug_output('CONFIG')
+        if 'button_balance' in globals() and not button_balance.value:
+            debug_output('TOTAL WALLET')
+            previous_coin = current_coin
+            previous_screen = current_screen
             current_screen = -2
 
         if 'button_left' in globals() and not button_left.value:

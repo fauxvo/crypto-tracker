@@ -33,7 +33,7 @@ export async function applicationSettingsQuestion(
         }),
       },
       {
-        type: 'input',
+        type: 'number',
         name: 'rightButtonPin',
         message:
           'Which pin would you like to use for navigating to the next screen?',
@@ -42,7 +42,7 @@ export async function applicationSettingsQuestion(
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
       {
-        type: 'input',
+        type: 'number',
         name: 'leftButtonPin',
         message:
           'Which pin would you like to use for navigating to the previous screen?',
@@ -51,11 +51,11 @@ export async function applicationSettingsQuestion(
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
       {
-        type: 'input',
-        name: 'configButtonPin',
+        type: 'number',
+        name: 'balanceButtonPin',
         message:
-          'Which pin would you like to use for navigating to the config screen?',
-        default: applicationSettings.configButtonPin,
+          'Which pin would you like to use for navigating to the total balance screen?',
+        default: applicationSettings.balanceButtonPin,
         when: (answers) =>
           [ADA_SSD1306, SH1106].includes(answers.typeOfDisplay),
       },
@@ -84,6 +84,21 @@ export async function applicationSettingsQuestion(
         name: 'showProgressBar',
         message: 'Would you like to display the progress bar?',
         default: applicationSettings.showProgressBar,
+      },
+      {
+        type: 'input',
+        name: 'showProgressBar',
+        message: 'Would you like to display the progress bar?',
+        default: applicationSettings.showProgressBar,
+      },
+      {
+        type: 'number',
+        name: 'timeOnScreen',
+        message: 'How long would you like to stay on each screen (in seconds)?',
+        default: applicationSettings.timeOnScreen,
+        validate: (timeOnScreen) => {
+          return timeOnScreen > 3
+        },
       },
       {
         type: 'confirm',
