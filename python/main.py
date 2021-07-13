@@ -552,9 +552,10 @@ def display(canvas):
     else:
         if 'button_balance' in globals() and not button_balance.value:
             debug_output('TOTAL WALLET')
-            previous_coin = current_coin
-            previous_screen = current_screen
-            current_screen = -2
+            if current_screen != -2:
+                previous_coin = current_coin
+                previous_screen = current_screen
+                current_screen = -2
 
         if 'button_left' in globals() and not button_left.value:
             debug_output('LEFT')

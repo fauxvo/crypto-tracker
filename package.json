@@ -1,12 +1,13 @@
 {
   "name": "crypto-tracker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
     "lint-fix": "eslint --fix src",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "keywords": [
     "Crypto-Tracker",
@@ -19,7 +20,8 @@
   "author": "Fauxvo",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^15.14.0"
+    "@types/node": "^15.14.0",
+    "auto-changelog": "^2.3.0"
   },
   "dependencies": {
     "@types/eslint": "^7.2.13",
