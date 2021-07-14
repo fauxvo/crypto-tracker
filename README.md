@@ -18,6 +18,8 @@ Crypto Tracker takes the [SafePi](https://github.com/aCallum/SafePi) project eve
 - The ability to schedule when the application is being run either between a specific set of times (09:00 -> 17:00) or a schedule for a particular duration (20 minutes at the start of every hour)
 - The ability to toggle through your tracked coins using Next / Prev buttons (currently only the Adafruit SSD1306 Display is supported)
 - Support for rotating the screen
+- Ability to toggle which screens are shown per coin (Balance, Current Price, Reflections)
+- Ability to change the speed at which each screen is displayed for
 - Support for showing total balance of all coins in all wallets
 
 ### Prerequisites:
